@@ -1,0 +1,5 @@
+fastapi
+unicorn     # веб-сервер Unicorn
+httpie      # Текстовый веб-клиент HTTPie
+requests
+httpx       # Пакет синхронного/асинхронного веб-клиента HTTPX
