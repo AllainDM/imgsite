@@ -1,5 +1,5 @@
 fastapi
-unicorn     # веб-сервер Unicorn
+uvicorn     # веб-сервер Uvicorn
 httpie      # Текстовый веб-клиент HTTPie
 requests
 httpx       # Пакет синхронного/асинхронного веб-клиента HTTPX
