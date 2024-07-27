@@ -27,7 +27,7 @@ topics_dict["JS"] = [6, 7]
 print(f"topics_dict {topics_dict}")
 # Словарь с изображениями, где ключ id, а значение путь
 dict_img = {}
-dict_img[1] = '1.jpeg'
+dict_img[1] = '1.jpg'
 print(f"dict_img {dict_img}")
 
 
