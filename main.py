@@ -25,6 +25,10 @@ topics_dict = {i: [] for i in topics}
 topics_dict["Юмор"] = [1, 2, 3, 4, 5]
 topics_dict["JS"] = [6, 7]
 print(f"topics_dict {topics_dict}")
+# Словарь с изображениями, где ключ id, а значение путь
+dict_img = {}
+dict_img[1] = '1.jpeg'
+print(f"dict_img {dict_img}")
 
 
 @app.get('/get_topics')
@@ -40,7 +44,7 @@ def get_topics(topic: str):
 
 @app.get('/get_img/{img_id}')
 def get_topics(img_id: int):
-    return f"Тут картинка с ид: {img_id}"
+    return f"img/{dict_img[img_id]}"
 
 
 if __name__ == "__main__":
