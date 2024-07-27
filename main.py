@@ -24,6 +24,7 @@ topics = ["Юмор", "JS", "HTML", "CSS", "Python"]
 topics_dict = {i: [] for i in topics}
 topics_dict["Юмор"] = [1, 2, 3, 4, 5]
 topics_dict["JS"] = [6, 7]
+topics_dict["CSS"] = [15, 17]
 print(f"topics_dict {topics_dict}")
 # Словарь с изображениями, где ключ id, а значение путь
 dict_img = {}
