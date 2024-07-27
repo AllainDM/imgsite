@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 
 
 app = FastAPI()
@@ -7,7 +8,7 @@ app = FastAPI()
 # Заглушка БД.
 # Список тем.
 topics = ["Юмор", "JS", "HTML", "CSS", "Python"]
-# Список ид картинок по темам(самих картинок нет).
+# Словарь ид картинок по темам(самих картинок нет).
 # Создадим словарь с темами(ключ) где значение пустой список.
 topics_dict = {i: [] for i in topics}
 topics_dict["Юмор"] = [1, 2, 3, 4, 5]
@@ -32,5 +33,4 @@ def get_topics(img_id: int):
 
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run("main:app", reload=True)
