@@ -27,9 +27,6 @@ def get_topics():
     return img_links.topics
 
 
-print(img_links.dict_img["Юмор"])
-
-
 @app.get('/get_topic/{topic}')
 def get_topics(topic: str):
     try:
