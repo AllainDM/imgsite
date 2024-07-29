@@ -1,10 +1,13 @@
-from fastapi.middleware.cors import CORSMiddleware
-
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 import uvicorn
 
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"))
 
 origins = ["*"]
 
@@ -45,7 +48,7 @@ def get_topics(topic: str):
 
 @app.get('/get_img/{img_id}')
 def get_topics(img_id: int):
-    return f"img/{dict_img[img_id]}"
+    return f"static/img/{dict_img[img_id]}"
 
 
 if __name__ == "__main__":
