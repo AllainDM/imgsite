@@ -3,3 +3,6 @@ uvicorn     # веб-сервер Uvicorn
 httpie      # Текстовый веб-клиент HTTPie
 requests
 httpx       # Пакет синхронного/асинхронного веб-клиента HTTPX
+sqlalchemy
+alembic
+psycopg2-binary

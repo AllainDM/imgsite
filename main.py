@@ -21,7 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-print(img_links.topics)
 
 @app.get('/get_topics')
 def get_topics():
