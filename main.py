@@ -4,6 +4,8 @@ from fastapi.staticfiles import StaticFiles
 
 import uvicorn
 
+from img_links import dict_img
+
 
 app = FastAPI()
 
@@ -19,6 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Заглушка БД.
 # Список тем.
 topics = ["Юмор", "JS", "HTML", "CSS", "Python"]
@@ -29,9 +32,7 @@ topics_dict["Юмор"] = [1, 2, 3, 4, 5]
 topics_dict["JS"] = [6, 7]
 topics_dict["CSS"] = [15, 17]
 print(f"topics_dict {topics_dict}")
-# Словарь с изображениями, где ключ id, а значение путь
-dict_img = {}
-dict_img[1] = '1.jpg'
+# Словарь с изображениями, где ключ id, а значение путь. Без БД испортируем из модуля.
 print(f"dict_img {dict_img}")
 
 
