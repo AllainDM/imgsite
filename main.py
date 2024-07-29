@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 
 import uvicorn
 
-from img_links import dict_img
+import img_links
 
 
 app = FastAPI()
@@ -22,34 +22,25 @@ app.add_middleware(
 )
 
 
-# Заглушка БД.
-# Список тем.
-topics = ["Юмор", "JS", "HTML", "CSS", "Python"]
-# Словарь ид картинок по темам(самих картинок нет).
-# Создадим словарь с темами(ключ) где значение пустой список.
-topics_dict = {i: [] for i in topics}
-topics_dict["Юмор"] = [1, 2, 3, 4, 5]
-topics_dict["JS"] = [6, 7]
-topics_dict["CSS"] = [15, 17]
-print(f"topics_dict {topics_dict}")
-# Словарь с изображениями, где ключ id, а значение путь. Без БД испортируем из модуля.
-print(f"dict_img {dict_img}")
-
-
 @app.get('/get_topics')
 def get_topics():
-    # return {i for i in topics}
-    return topics
+    return img_links.topics
+
+
+print(img_links.dict_img["Юмор"])
 
 
 @app.get('/get_topic/{topic}')
 def get_topics(topic: str):
-    return topics_dict[topic]
+    try:
+        return img_links.dict_img[topic]
+    except KeyError:
+        return "Неверный ключ"
 
 
-@app.get('/get_img/{img_id}')
-def get_topics(img_id: int):
-    return f"static/img/{dict_img[img_id]}"
+# @app.get('/get_img/{img_id}')
+# def get_topics(img_id: int):
+#     return f"static/img/{dict_img[img_id]}"
 
 
 if __name__ == "__main__":
