@@ -1,13 +1,42 @@
-from fastapi import FastAPI
+from fastapi_users import fastapi_users, FastAPIUsers
+from pydantic import BaseModel, Field
+
+from fastapi import FastAPI, Request, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-
+from fastapi.encoders import jsonable_encoder
+# from fastapi.exceptions import ValidationError
+from fastapi.responses import JSONResponse
 import uvicorn
+
+from auth.auth import auth_backend
+from auth.database import User
+from auth.manager import get_user_manager
+from auth.schemas import UserRead, UserCreate
 
 import img_links
 
 
-app = FastAPI()
+app = FastAPI(title="ImgSite")
+
+fastapi_users = FastAPIUsers[User, int](
+    get_user_manager,
+    [auth_backend],
+)
+
+app.include_router(
+    fastapi_users.get_auth_router(auth_backend),
+    prefix="/auth/jwt",
+    tags=["auth"],
+)
+
+app.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["auth"],
+)
+
+current_user = fastapi_users.current_user()
 
 app.mount("/static", StaticFiles(directory="static"))
 
@@ -22,8 +51,29 @@ app.add_middleware(
 )
 
 
+@app.get("/protected-route")
+def protected_route(user: User = Depends(current_user)):
+    return f"Hello, {user.username}"
+
+
+@app.get("/check_user")
+def check_user():
+    try:
+        user: User = Depends(current_user)
+        return f"{user.username}"
+    except AttributeError:
+        return f"Неавторизованный"
+
+
 @app.get('/get_topics')
 def get_topics():
+
+    # if user:
+    #     print(111)
+    # else:
+    #     print("Пользователь неавторизован.")
+    # print(f"Попытка получить картинки: {user.email}")
+    # print(f"Попытка получить картинки: {current_user}")
     return img_links.topics
 
 
